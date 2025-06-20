@@ -11,7 +11,7 @@ import { Play, Pause, ChevronRight, ChevronLeft, Mail, Linkedin, Github } from "
 import { MusicPlayerFooter } from "@/my_components/music_player_footer"
 import input from "../public/input.json"
 
-// Updated scrollbar styles with mobile fixes
+// Updated scrollbar styles - removed mobile safe area stuff
 const scrollbarStyles = `
   .hide-scrollbar {
     -ms-overflow-style: none;  /* IE and Edge */
@@ -41,11 +41,6 @@ const scrollbarStyles = `
   .show-scrollbar-on-scroll::-webkit-scrollbar-thumb {
     background-color: rgba(155, 155, 155, 0.5);
     border-radius: 10px;
-  }
-
-  /* Mobile safe area support */
-  .mobile-safe {
-    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 
   /* Prevent horizontal overflow on mobile */
@@ -208,9 +203,9 @@ export default function Home(): ReactElement {
               </div>
             </div>
 
-            {/* Scrollable Content */}
+            {/* Scrollable Content - removed extra bottom padding */}
             <div
-              className="flex-1 overflow-y-auto hide-scrollbar show-scrollbar-on-scroll pb-32 lg:pb-8"
+              className="flex-1 overflow-y-auto hide-scrollbar show-scrollbar-on-scroll pb-8"
               onScroll={handleScroll}
             >
               <div className="px-3 sm:px-4 lg:px-8 pb-8 pt-4 lg:pt-6 max-w-full">
@@ -611,8 +606,8 @@ export default function Home(): ReactElement {
           </div>
         </div>
 
-        {/* Bottom Player with Mobile Safe Area */}
-        <div className="mobile-safe">
+        {/* Bottom Player - Hidden on Mobile */}
+        <div className="hidden lg:block">
           <MusicPlayerFooter isPlaying={isPlaying} onPlayStateChange={handlePlayStateChange} />
         </div>
       </div>
