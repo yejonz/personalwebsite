@@ -156,7 +156,7 @@ export default function Home(): ReactElement {
         {/* Main Content */}
         <div className="flex flex-1 overflow-hidden">
           {/* Left Sidebar - Desktop Only */}
-          <div className="hidden lg:flex w-48 bg-black flex-col items-center py-6 space-y-8">
+          <div className="hidden lg:flex w-24 flex-shrink-0 bg-black flex-col items-center py-6 space-y-8">
             <div className="text-white text-3xl font-bold">|||</div>
 
             {/* Custom Social/App Icons */}
