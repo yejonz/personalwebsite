@@ -89,16 +89,32 @@
   "aboutMe": "Hi! I'm Jonathan, a CS student @ Stanford! I'm passionate about full-stack and software development, and I love working on projects that make a real-world impact. I find it extremely fulfilling to identify people's needs and build efficient, intuitive products that meet them!\n\nIn my free time, I like to workout, run, and catch up on the latest trending movies and shows (I'm also a chronic doomscroller but we don't talk about that) I've been playing percussion since 6th grade and piano since the age of 5, and I'm currently a percussionist in the Stanford Symphony Orchestra. I listen to all kinds of music - from classical, to The Weeknd, to Julian Casablancas, to Jeff Buckley, to video game/movie soundtracks, etc. etc... I'm also a huge foodie and always down to grab a bite somewhere new (add me on Beli!!)\n\nAdd my socials :)\nInstagram: @yonaseen\nBeli: @yonaseen",
   "galleryImages": [
     {
-      "src": "/about-pfp.jpg",
-      "caption": "Professional headshot at Stanford University"
+      "src": "/marimba.jpg",
+      "caption": "Marimba solo at a school concert"
     },
     {
-      "src": "/about-pfp.jpg",
-      "caption": "Working on a full-stack project"
+      "src": "/franceorch.jpg",
+      "caption": "SSO Concert in France"
     },
     {
-      "src": "/about-pfp.jpg",
-      "caption": "Presenting at a tech conference"
+      "src": "/perc.jpg",
+      "caption": "Mahler 6 Percussion Section"
+    },
+    {
+      "src": "/aura.jpg",
+      "caption": "Just aura farming tbh"
+    },
+    {
+      "src": "/workout.jpg",
+      "caption": "Post-workout pic"
+    },
+    {
+      "src": "/noodles.jpg",
+      "caption": "Nood(le)s with the dudes"
+    },
+    {
+      "src": "/hotdog.jpg",
+      "caption": "Hotdog pub in France"
     }
   ]
 }

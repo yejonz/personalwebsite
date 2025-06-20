@@ -5,7 +5,6 @@ import React from "react"
 import type { ReactElement } from "react"
 
 import { useState, useCallback } from "react"
-import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Play, Pause, ChevronRight, ChevronLeft, Mail, Linkedin, Github } from "lucide-react"
 import { MusicPlayerFooter } from "@/my_components/music_player_footer"
@@ -101,19 +100,20 @@ export default function Home(): ReactElement {
   const experiences = inputData.experiences
   const projects = inputData.projects
   const galleryImages = inputData.galleryImages
+  const iconSize = 32
   const sidebarIcons = [
     {
-      icon: <Mail style={{ width: "48px", height: "48px" }} />,
+      icon: <Mail style={{ width: `${iconSize}px`, height: `${iconSize}px` }} />,
       name: "mail",
       label: "Email",
     },
     {
-      icon: <Linkedin style={{ width: "48px", height: "48px" }} />,
+      icon: <Linkedin style={{ width: `${iconSize}px`, height: `${iconSize}px` }} />,
       name: "linkedin",
       label: "LinkedIn",
     },
     {
-      icon: <Github style={{ width: "48px", height: "48px" }} />,
+      icon: <Github style={{ width: `${iconSize}px`, height: `${iconSize}px` }} />,
       name: "github",
       label: "GitHub",
     },
@@ -212,13 +212,7 @@ export default function Home(): ReactElement {
                 {/* Album Header */}
                 <div className="flex flex-col lg:flex-row lg:items-end space-y-4 sm:space-y-6 lg:space-y-0 lg:space-x-16 mb-6 lg:mb-8">
                   <div className="w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 bg-black rounded shadow-2xl overflow-hidden relative mx-auto lg:mx-0 flex-shrink-0">
-                    <Image
-                      src="/main-pfp.jpg"
-                      alt="Jonathan Ye"
-                      width={320}
-                      height={320}
-                      className="object-cover w-full h-full"
-                    />
+                    <img src="/main-pfp.jpg" alt="Jonathan Ye" className="object-cover w-full h-full" loading="lazy" />
                   </div>
                   <div className="flex-1 text-center lg:text-left lg:ml-8 min-w-0">
                     <div className="text-xs sm:text-sm lg:text-base text-gray-300 mb-1 sm:mb-2 lg:mb-3">Portfolio</div>
@@ -312,12 +306,11 @@ export default function Home(): ReactElement {
                               <div className="flex-shrink-0">
                                 <div className="w-full lg:w-48 h-24 sm:h-32 lg:h-48 bg-gray-700 rounded-lg overflow-hidden">
                                   {exp.image ? (
-                                    <Image
+                                    <img
                                       src={exp.image || "/placeholder.svg"}
                                       alt={`${exp.company} logo`}
-                                      width={192}
-                                      height={192}
                                       className="object-cover w-full h-full"
+                                      loading="lazy"
                                     />
                                   ) : (
                                     <div className="w-full h-full flex items-center justify-center text-gray-500 text-xs sm:text-sm lg:text-base">
@@ -418,12 +411,11 @@ export default function Home(): ReactElement {
                                 <div className="flex-shrink-0">
                                   <div className="w-full lg:w-48 h-24 sm:h-32 lg:h-48 bg-gray-700 rounded-lg overflow-hidden">
                                     {proj.image ? (
-                                      <Image
+                                      <img
                                         src={proj.image || "/placeholder.svg"}
                                         alt={`${proj.role} preview`}
-                                        width={192}
-                                        height={192}
                                         className="object-cover w-full h-full"
+                                        loading="lazy"
                                       />
                                     ) : (
                                       <div className="w-full h-full flex items-center justify-center text-gray-500 text-xs sm:text-sm lg:text-base">
@@ -511,12 +503,11 @@ export default function Home(): ReactElement {
 
                   <div className="bg-gray-800/30 rounded-lg p-4 sm:p-6 border border-gray-700/50">
                     <div className="relative mb-4 sm:mb-6">
-                      <Image
+                      <img
                         src={input.aboutPfp || "/placeholder.svg"}
                         alt="Jonathan Ye"
-                        width={320}
-                        height={200}
                         className="rounded-lg object-cover w-full"
+                        loading="lazy"
                       />
                     </div>
                     <h4 className="text-lg sm:text-xl font-bold mb-2">Jonathan Ye</h4>
@@ -528,12 +519,11 @@ export default function Home(): ReactElement {
                     {/* Gallery Images */}
                     {galleryImages.map((image, index) => (
                       <div key={index} className="relative mb-4 sm:mb-6 last:mb-0">
-                        <Image
+                        <img
                           src={image.src || "/placeholder.svg"}
                           alt="Gallery Image"
-                          width={320}
-                          height={200}
                           className="rounded-lg object-cover w-full"
+                          loading="lazy"
                         />
                         {image.caption && (
                           <div className="mt-2">
@@ -571,12 +561,11 @@ export default function Home(): ReactElement {
                 <div className="mb-8">
                   <h3 className="text-2xl font-semibold mb-6">About me</h3>
                   <div className="relative mb-6">
-                    <Image
+                    <img
                       src={input.aboutPfp || "/placeholder.svg"}
                       alt="Jonathan Ye"
-                      width={320}
-                      height={200}
                       className="rounded-lg object-cover w-full"
+                      loading="lazy"
                     />
                   </div>
                   <h4 className="text-2xl font-bold mb-3">Jonathan Ye</h4>
@@ -586,12 +575,11 @@ export default function Home(): ReactElement {
                   {/* Gallery Images */}
                   {galleryImages.map((image, index) => (
                     <div key={index} className="relative mb-6">
-                      <Image
+                      <img
                         src={image.src || "/placeholder.svg"}
                         alt="Gallery Image"
-                        width={320}
-                        height={200}
                         className="rounded-lg object-cover w-full"
+                        loading="lazy"
                       />
                       {image.caption && (
                         <div className="mt-3">
