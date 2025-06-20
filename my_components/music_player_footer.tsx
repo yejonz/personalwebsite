@@ -323,8 +323,8 @@ export function MusicPlayerFooter({ isPlaying: parentIsPlaying, onPlayStateChang
   // Loading state
   if (isLoading) {
     return (
-      <div className="h-20 bg-gray-900 border-t border-gray-800 flex items-center justify-center">
-        <div className="text-gray-400">Loading music player...</div>
+      <div className="h-24 bg-gray-900 border-t border-gray-800 flex items-center justify-center">
+        <div className="text-gray-400 text-base">Loading music player...</div>
       </div>
     )
   }
@@ -332,8 +332,8 @@ export function MusicPlayerFooter({ isPlaying: parentIsPlaying, onPlayStateChang
   // No tracks state
   if (playlist.length === 0) {
     return (
-      <div className="h-20 bg-gray-900 border-t border-gray-800 flex items-center justify-center">
-        <div className="text-gray-400">No music tracks found</div>
+      <div className="h-24 bg-gray-900 border-t border-gray-800 flex items-center justify-center">
+        <div className="text-gray-400 text-base">No music tracks found</div>
       </div>
     )
   }
@@ -343,7 +343,7 @@ export function MusicPlayerFooter({ isPlaying: parentIsPlaying, onPlayStateChang
 
   return (
     <>
-      <div className="h-20 bg-gray-900 border-t border-gray-800 flex items-center justify-between px-4">
+      <div className="h-24 bg-gray-900 border-t border-gray-800 flex flex-col lg:flex-row items-center justify-between px-4 lg:px-6 py-2">
         {currentTrack && (
           <audio
             ref={audioRef}
@@ -366,55 +366,62 @@ export function MusicPlayerFooter({ isPlaying: parentIsPlaying, onPlayStateChang
           />
         )}
 
-        {/* Current Track Info */}
-        <div className="flex items-center space-x-3 w-80">
-            <div className="w-14 h-14 bg-gray-800 rounded flex items-center justify-center">
-              <Music2 className="w-6 h-6 text-gray-400" />
+        {/* Mobile Layout */}
+        <div className="flex lg:hidden w-full flex-col space-y-3">
+          {/* Top row - Track info and controls */}
+          <div className="flex items-center justify-between">
+            {/* Current Track Info */}
+            <div className="flex items-center space-x-3 min-w-0 flex-1">
+              <div className="w-12 h-12 bg-gray-800 rounded flex items-center justify-center flex-shrink-0">
+                <Music2 className="w-5 h-5 text-gray-400" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="font-medium text-sm truncate">{currentTrack.title}</div>
+                <div className="text-xs text-gray-400 truncate">{currentTrack.artist}</div>
+              </div>
             </div>
-          <div>
-            <div className="font-medium text-sm">{currentTrack.title}</div>
-            <div className="text-xs text-gray-400">{currentTrack.artist}</div>
-          </div>
-        </div>
 
-        {/* Player Controls */}
-        <div className="flex flex-col items-center space-y-2 flex-1 max-w-md mx-auto">
-          <div className="flex items-center space-x-4">
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              className="w-8 h-8 text-gray-400 hover:text-white hover:bg-transparent"
-              onClick={playPreviousTrack}
-              disabled={!canPlay}
-            >
-              <SkipBack className="w-4 h-4" />
-            </Button>
-            <Button
-              size="icon"
-              className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                canPlay && audioReady
-                  ? 'bg-white hover:bg-gray-200' 
-                  : 'bg-gray-600 cursor-not-allowed'
-              }`}
-              onClick={handlePlayClick}
-              disabled={!canPlay}
-            >
-              {isPlaying ? 
-                <Pause className="w-4 h-4 text-black" /> : 
-                <Play className="w-4 h-4 text-black ml-0.5" />
-              }
-            </Button>
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              className="w-8 h-8 text-gray-400 hover:text-white hover:bg-transparent"
-              onClick={playNextTrack} disabled={!canPlay}
-            >
-              <SkipForward className="w-4 h-4" />
-            </Button>
+            {/* Player Controls */}
+            <div className="flex items-center space-x-2 flex-shrink-0">
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="w-8 h-8 text-gray-400 hover:text-white hover:bg-transparent"
+                onClick={playPreviousTrack}
+                disabled={!canPlay}
+              >
+                <SkipBack className="w-4 h-4" />
+              </Button>
+              <Button
+                size="icon"
+                className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                  canPlay && audioReady
+                    ? 'bg-white hover:bg-gray-200' 
+                    : 'bg-gray-600 cursor-not-allowed'
+                }`}
+                onClick={handlePlayClick}
+                disabled={!canPlay}
+              >
+                {isPlaying ? 
+                  <Pause className="w-4 h-4 text-black" /> : 
+                  <Play className="w-4 h-4 text-black ml-0.5" />
+                }
+              </Button>
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="w-8 h-8 text-gray-400 hover:text-white hover:bg-transparent"
+                onClick={playNextTrack} 
+                disabled={!canPlay}
+              >
+                <SkipForward className="w-4 h-4" />
+              </Button>
+            </div>
           </div>
-          <div className="flex items-center space-x-2 w-full max-w-md">
-            <span className="text-xs text-gray-400">{formatTime(currentTime)}</span>
+
+          {/* Bottom row - Progress bar */}
+          <div className="flex items-center space-x-2 w-full">
+            <span className="text-xs text-gray-400 flex-shrink-0">{formatTime(currentTime)}</span>
             <div className="flex-1">
               <Slider
                 value={[currentTime]}
@@ -425,40 +432,107 @@ export function MusicPlayerFooter({ isPlaying: parentIsPlaying, onPlayStateChang
                 className="w-full"
               />
             </div>
-            <span className="text-xs text-gray-400">{formatTime(currentTrack.duration)}</span>
+            <span className="text-xs text-gray-400 flex-shrink-0">{formatTime(currentTrack.duration)}</span>
           </div>
         </div>
 
-        {/* Volume, Shuffle and Other Controls */}
-        <div className="flex items-center space-x-2 w-80 justify-end">
-          <div className="flex items-center space-x-2">
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              className={`w-8 h-8 ${isShuffled ? 'text-green-500' : 'text-gray-400'} hover:text-white hover:bg-transparent`}
-              onClick={toggleShuffle}
-              disabled={!canPlay}
-            >
-              <Shuffle className="w-4 h-4" />
-            </Button>
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              className="w-8 h-8 text-gray-400 hover:text-white hover:bg-transparent p-0"
-              onClick={toggleMute}
-              disabled={!canPlay}
-            >
-              {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-            </Button>
-            <div className="w-20">
-              <Slider
-                value={[isMuted ? 0 : volume]}
-                max={100}
-                step={1}
-                onValueChange={handleVolumeChange}
+        {/* Desktop Layout */}
+        <div className="hidden lg:flex items-center justify-between w-full">
+          {/* Current Track Info */}
+          <div className="flex items-center space-x-4 w-96">
+            <div className="w-16 h-16 bg-gray-800 rounded flex items-center justify-center">
+              <Music2 className="w-7 h-7 text-gray-400" />
+            </div>
+            <div>
+              <div className="font-medium text-base">{currentTrack.title}</div>
+              <div className="text-sm text-gray-400">{currentTrack.artist}</div>
+            </div>
+          </div>
+
+          {/* Player Controls */}
+          <div className="flex flex-col items-center space-y-3 flex-1 max-w-xl mx-auto">
+            <div className="flex items-center space-x-5">
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="w-9 h-9 text-gray-400 hover:text-white hover:bg-transparent"
+                onClick={playPreviousTrack}
                 disabled={!canPlay}
-                className="w-full"
-              />
+              >
+                <SkipBack className="w-5 h-5" />
+              </Button>
+              <Button
+                size="icon"
+                className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                  canPlay && audioReady
+                    ? 'bg-white hover:bg-gray-200' 
+                    : 'bg-gray-600 cursor-not-allowed'
+                }`}
+                onClick={handlePlayClick}
+                disabled={!canPlay}
+              >
+                {isPlaying ? 
+                  <Pause className="w-5 h-5 text-black" /> : 
+                  <Play className="w-5 h-5 text-black ml-0.5" />
+                }
+              </Button>
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="w-9 h-9 text-gray-400 hover:text-white hover:bg-transparent"
+                onClick={playNextTrack} 
+                disabled={!canPlay}
+              >
+                <SkipForward className="w-5 h-5" />
+              </Button>
+            </div>
+            <div className="flex items-center space-x-3 w-full max-w-xl">
+              <span className="text-sm text-gray-400">{formatTime(currentTime)}</span>
+              <div className="flex-1">
+                <Slider
+                  value={[currentTime]}
+                  max={currentTrack.duration || 100}
+                  step={1}
+                  onValueChange={seekTo}
+                  disabled={!canPlay || !audioReady}
+                  className="w-full"
+                />
+              </div>
+              <span className="text-sm text-gray-400">{formatTime(currentTrack.duration)}</span>
+            </div>
+          </div>
+
+          {/* Volume, Shuffle and Other Controls */}
+          <div className="flex items-center space-x-3 w-96 justify-end">
+            <div className="flex items-center space-x-3">
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className={`w-9 h-9 ${isShuffled ? 'text-green-500' : 'text-gray-400'} hover:text-white hover:bg-transparent`}
+                onClick={toggleShuffle}
+                disabled={!canPlay}
+              >
+                <Shuffle className="w-5 h-5" />
+              </Button>
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="w-9 h-9 text-gray-400 hover:text-white hover:bg-transparent p-0"
+                onClick={toggleMute}
+                disabled={!canPlay}
+              >
+                {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+              </Button>
+              <div className="w-24">
+                <Slider
+                  value={[isMuted ? 0 : volume]}
+                  max={100}
+                  step={1}
+                  onValueChange={handleVolumeChange}
+                  disabled={!canPlay}
+                  className="w-full"
+                />
+              </div>
             </div>
           </div>
         </div>
