@@ -22,9 +22,11 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <main className="flex-1">{children}</main>
-          <MusicPlayerFooter />
         </ThemeProvider>
       </body>
+      {/* <body className="min-h-screen flex flex-col">
+          <main className="flex-1">{children}</main>
+      </body> */}
     </html>
   )
 }

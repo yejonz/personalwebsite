@@ -1,0 +1,104 @@
+{
+  "mainPfp": "/main-pfp.jpg",
+  "aboutPfp": "/about-pfp.jpg",
+  "resume": "/jonathanyeresume.pdf",
+  "sidebarLinks": {
+    "mail": "mailto:yejonz@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/jonathan-z-ye/",
+    "github": "https://github.com/yejonz"
+    },
+  "experiences": [
+    {
+      "role": "Software Development Engineering Intern",
+      "company": "Amazon",
+      "type": "Internship",
+      "date": "June '25 - Sep. '25",
+      "stack": "Java, AWS, MCP",
+      "image": "/amazon.jpg",
+      "details": "Interning @ PXT (People eXperiences Technology)"
+    },
+    {
+      "role": "Researcher",
+      "company": "Stanford Cybersecurity and AI Lab",
+      "type": "Research",
+      "date": "Dec. '24 - June '25",
+      "stack": "Python, Typescript, React.js, Docker",
+      "image": "/sail.jpg",
+      "details": "Worked in Percy Liang and Dan Boneh's Cybersecurity + AI Lab on BountyBench, a gold-standard benchmarker for LLM models on cybersecurity tasks. Contributed high quality cybersecurity tasks, implemented features to UI/UX, and improved agent workflow.",
+      "link": "https://arxiv.org/abs/2505.15216v1",
+      "linkTitle": "Publication"
+    },
+    {
+      "role": "Software Engineer",
+      "company": "Gradesoar",
+      "type": "Internship",
+      "date": "July '24 - Sep. '24",
+      "stack": "Javascript/Typescript, React.js, Next.js",
+      "image": "/gradesoar.jpg",
+      "details": "Worked on a learning management system for teachers in Texas to teach the TEKS curriculum. Designed and set up webpages and built custom UI components within the Jamstack."
+    }
+  ],
+  "projects": [
+    {
+      "role": "Poke Pocket Market",
+      "stack": "Typescript, React.js, Next.js, Firebase, Digital Ocean",
+      "image": "/pokepocketmarket.jpg",
+      "details": "Full-stack website that helps Pokemon TCG Pocket players find trades. Users input the trading cards they have and want, then they are instantly matched to other users with mutually benefitting trades available.",
+      "link": "https://pokepocket.market/",
+      "linkTitle": "Website",
+      "link2": "https://www.youtube.com/watch?v=J4pXy4sc4WE",
+      "linkTitle2": "Demo",
+      "link3": "https://github.com/yejonz/pokepocketmarket",
+      "linkTitle3": "Github"
+    },
+    {
+      "role": "Aspen",
+      "stack": "Discord.py, OpenAI API, LangGraph, Exa API, Python",
+      "image": "",
+      "details": "AI-powered therapist for Discord. Monitors Discord channels and privately reaches out to members exhibiting depressive or self-harming behaviours. Develops a therapy plan for the member using updated, research-backed information from the web.",
+      "link": "https://github.com/marcreniel/Aspen",
+      "linkTitle": "Github"
+    },
+    {
+      "role": "Data Processor and Map Dashboard",
+      "stack": "Typescript, React.js, Next.js API, Mapbox API",
+      "image": "",
+      "details": "Full-stack dashboard tool that processes raw housing listing data from an API and displays cleaned listings in a dynamic map with efficient filtering capability.",
+      "link": "https://github.com/yejonz/jonathanyeroots",
+      "linkTitle": "Github",
+      "link2": "https://www.loom.com/share/b7dd00ca2b4c436ca12fb1cfaae740fa?sid=ddfb629e-9405-4fc6-8f5d-0cbe7539f913",
+      "linkTitle2": "Demo"
+    },
+    {
+      "role": "Project Launchpad",
+      "stack": "Unity, C#, FL Studio, Audacity",
+      "image": "/launchpad.jpg",
+      "details": "Guitar Hero/Osu-inspired rhythm game that instead uses all the letter keys on your keyboard for note interactions. Added a system to allow players to easily create levels and share and import them as JSON files.",
+      "link": "https://yonaseen.itch.io/project-launchpad",
+      "linkTitle": "Itch.io"
+    },
+    {
+      "role": "Project HS",
+      "stack": "Unity, C#, FL Studio, Audacity",
+      "image": "/hs.jpg",
+      "details": "2D RPG and rhythm game about the psychological impact of academic stress. Collaborated closely with an industry professional to turn game designs into practical implementations. Also produced my own synth-style soundtrack for levels.",
+      "link": "https://yonaseen.itch.io/project-hs",
+      "linkTitle": "Itch.io"
+    }
+  ],
+  "aboutMe": "Hi! I'm Jonathan, a CS student @ Stanford! I'm passionate about full-stack and software development, and I love working on projects that make a real-world impact. I find it extremely fulfilling to identify people's needs and build efficient, intuitive products that meet them!\n\nIn my free time, I like to workout, run, and catch up on the latest trending movies and shows (I'm also a chronic doomscroller but we don't talk about that) I've been playing percussion since 6th grade and piano since the age of 5, and I'm currently a percussionist in the Stanford Symphony Orchestra. I listen to all kinds of music - from classical, to The Weeknd, to Julian Casablancas, to Jeff Buckley, to video game/movie soundtracks, etc. etc... I'm also a huge foodie and always down to grab a bite somewhere new (add me on Beli!!)\n\nAdd my socials :)\nInstagram: @yonaseen\nBeli: @yonaseen",
+  "galleryImages": [
+    {
+      "src": "/about-pfp.jpg",
+      "caption": "Professional headshot at Stanford University"
+    },
+    {
+      "src": "/about-pfp.jpg",
+      "caption": "Working on a full-stack project"
+    },
+    {
+      "src": "/about-pfp.jpg",
+      "caption": "Presenting at a tech conference"
+    }
+  ]
+}
