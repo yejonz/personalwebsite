@@ -89,31 +89,31 @@
   "aboutMe": "Hi! I'm Jonathan, a CS student @ Stanford! I'm passionate about full-stack and software development, and I love working on projects that make a real-world impact. I find it extremely fulfilling to identify people's needs and build efficient, intuitive products that meet them!\n\nIn my free time, I like to workout, run, and catch up on the latest trending movies and shows (I'm also a chronic doomscroller but we don't talk about that) I've been playing percussion since 6th grade and piano since the age of 5, and I'm currently a percussionist in the Stanford Symphony Orchestra. I listen to all kinds of music - from classical, to The Weeknd, to Julian Casablancas, to Jeff Buckley, to video game/movie soundtracks, etc. etc... I'm also a huge foodie and always down to grab a bite somewhere new (add me on Beli!!)\n\nAdd my socials :)\nInstagram: @yonaseen\nBeli: @yonaseen",
   "galleryImages": [
     {
-      "src": "/marimba.jpg",
+      "src": "marimba",
       "caption": "Marimba solo at a school concert"
     },
     {
-      "src": "/franceorch.jpg",
+      "src": "franceorch",
       "caption": "SSO Concert in France"
     },
     {
-      "src": "/perc.jpg",
+      "src": "perc",
       "caption": "Mahler 6 Percussion Section"
     },
     {
-      "src": "/aura.jpg",
+      "src": "aura",
       "caption": "Just aura farming tbh"
     },
     {
-      "src": "/workout.jpg",
+      "src": "workout",
       "caption": "Post-workout pic"
     },
     {
-      "src": "/noodles.jpg",
+      "src": "noodles",
       "caption": "Nood(le)s with the dudes"
     },
     {
-      "src": "/hotdog.jpg",
+      "src": "hotdog",
       "caption": "Hotdog pub in France"
     }
   ]
