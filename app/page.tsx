@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useEffect } from "react"
+import Image from "next/image"
 
 import type { ReactElement } from "react"
 
@@ -104,7 +105,7 @@ export default function Home(): ReactElement {
 
         // Create a mapping of filename (without extension) to blob URL
         const imageMap: { [key: string]: string } = {}
-        images.forEach((img: any) => {
+        images.forEach((img: { filename: string; src: string }) => {
           const nameWithoutExt = img.filename.split(".")[0]
           imageMap[nameWithoutExt] = img.src
         })
@@ -235,7 +236,16 @@ export default function Home(): ReactElement {
                 {/* Album Header */}
                 <div className="flex flex-col lg:flex-row lg:items-end space-y-4 sm:space-y-6 lg:space-y-0 lg:space-x-16 mb-6 lg:mb-8">
                   <div className="w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 bg-black rounded shadow-2xl overflow-hidden relative mx-auto lg:mx-0 flex-shrink-0">
-                    <img src="/main-pfp.jpg" alt="Jonathan Ye" className="object-cover w-full h-full" loading="eager" />
+                    <Image
+                      src="/main-pfp.jpg"
+                      alt="Jonathan Ye"
+                      width={320}
+                      height={320}
+                      quality={100}
+                      unoptimized={true}
+                      priority
+                      className="object-cover w-full h-full"
+                    />
                   </div>
                   <div className="flex-1 text-center lg:text-left lg:ml-8 min-w-0">
                     <div className="text-xs sm:text-sm lg:text-base text-gray-300 mb-1 sm:mb-2 lg:mb-3">Portfolio</div>
@@ -329,9 +339,13 @@ export default function Home(): ReactElement {
                               <div className="flex-shrink-0">
                                 <div className="w-full lg:w-48 h-24 sm:h-32 lg:h-48 bg-gray-700 rounded-lg overflow-hidden">
                                   {exp.image ? (
-                                    <img
+                                    <Image
                                       src={exp.image || "/placeholder.svg"}
                                       alt={`${exp.company} logo`}
+                                      width={192}
+                                      height={192}
+                                      quality={100}
+                                      unoptimized={true}
                                       className="object-cover w-full h-full"
                                       loading="lazy"
                                     />
@@ -434,9 +448,13 @@ export default function Home(): ReactElement {
                                 <div className="flex-shrink-0">
                                   <div className="w-full lg:w-48 h-24 sm:h-32 lg:h-48 bg-gray-700 rounded-lg overflow-hidden">
                                     {proj.image ? (
-                                      <img
+                                      <Image
                                         src={proj.image || "/placeholder.svg"}
                                         alt={`${proj.role} preview`}
+                                        width={192}
+                                        height={192}
+                                        quality={100}
+                                        unoptimized={true}
                                         className="object-cover w-full h-full"
                                         loading="lazy"
                                       />
@@ -526,11 +544,14 @@ export default function Home(): ReactElement {
 
                   <div className="bg-gray-800/30 rounded-lg p-4 sm:p-6 border border-gray-700/50">
                     <div className="relative mb-4 sm:mb-6">
-                      <img
+                      <Image
                         src={input.aboutPfp || "/placeholder.svg"}
                         alt="Jonathan Ye"
-                        className="rounded-lg object-cover w-full"
-                        loading="lazy"
+                        width={800}
+                        height={600}
+                        quality={100}
+                        unoptimized={true}
+                        className="rounded-lg object-cover w-full h-auto"
                       />
                     </div>
                     <h4 className="text-lg sm:text-xl font-bold mb-2">Jonathan Ye</h4>
@@ -542,11 +563,14 @@ export default function Home(): ReactElement {
                     {/* Gallery Images - Mobile */}
                     {galleryImages.map((image, index) => (
                       <div key={index} className="relative mb-4 sm:mb-6 last:mb-0">
-                        <img
+                        <Image
                           src={slideshowImages[image.src] || image.src || "/placeholder.svg"}
                           alt="Gallery Image"
-                          className="rounded-lg object-cover w-full"
-                          loading="lazy"
+                          width={1200}
+                          height={900}
+                          quality={100}
+                          unoptimized={true}
+                          className="rounded-lg object-cover w-full h-auto"
                         />
                         {image.caption && (
                           <div className="mt-2">
@@ -584,11 +608,14 @@ export default function Home(): ReactElement {
                 <div className="mb-8">
                   <h3 className="text-2xl font-semibold mb-6">About me</h3>
                   <div className="relative mb-6">
-                    <img
+                    <Image
                       src={input.aboutPfp || "/placeholder.svg"}
                       alt="Jonathan Ye"
-                      className="rounded-lg object-cover w-full"
-                      loading="lazy"
+                      width={800}
+                      height={600}
+                      quality={100}
+                      unoptimized={true}
+                      className="rounded-lg object-cover w-full h-auto"
                     />
                   </div>
                   <h4 className="text-2xl font-bold mb-3">Jonathan Ye</h4>
@@ -598,9 +625,13 @@ export default function Home(): ReactElement {
                   {/* Gallery Images - Desktop */}
                   {galleryImages.map((image, index) => (
                     <div key={index} className="relative mb-6">
-                      <img
+                      <Image
                         src={slideshowImages[image.src] || image.src || "/placeholder.svg"}
                         alt="Gallery Image"
+                        width={1200}
+                        height={900}
+                        quality={100}
+                        unoptimized={true}
                         className="rounded-lg object-cover w-full"
                         loading="lazy"
                       />
