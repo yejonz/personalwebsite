@@ -1,11 +1,12 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import { ThemeProvider } from "@/my_components/theme_provider";
+import type React from "react"
+import type { Metadata } from "next"
+import "./globals.css"
+import { ThemeProvider } from "@/my_components/theme_provider"
 
 export const metadata: Metadata = {
   title: "Jonathan Ye",
   description: "Jonathan Ye's Personal Website",
-};
+}
 
 export default function RootLayout({
   children,
@@ -14,12 +15,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+      </head>
       <body className="min-h-screen flex flex-col">
-        <ThemeProvider
-          attribute="class"
-          forcedTheme="dark"
-          disableTransitionOnChange
-        >
+        <ThemeProvider attribute="class" forcedTheme="dark" disableTransitionOnChange>
           <main className="flex-1">{children}</main>
         </ThemeProvider>
       </body>
