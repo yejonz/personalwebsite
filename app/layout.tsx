@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { MusicPlayerFooter } from "@/my_components/music_player_footer";
 import { ThemeProvider } from "@/my_components/theme_provider";
 
 export const metadata: Metadata = {
@@ -24,9 +23,6 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
         </ThemeProvider>
       </body>
-      {/* <body className="min-h-screen flex flex-col">
-          <main className="flex-1">{children}</main>
-      </body> */}
     </html>
   )
 }
