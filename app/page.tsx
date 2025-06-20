@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Play, Pause, ChevronRight, ChevronLeft, Mail, Linkedin, Github } from "lucide-react"
 import { MusicPlayerFooter } from "@/my_components/music_player_footer"
 import input from "../public/input.json"
+import Image from "next/image"
 
 // Updated scrollbar styles - removed mobile safe area stuff
 const scrollbarStyles = `
@@ -212,7 +213,16 @@ export default function Home(): ReactElement {
                 {/* Album Header */}
                 <div className="flex flex-col lg:flex-row lg:items-end space-y-4 sm:space-y-6 lg:space-y-0 lg:space-x-16 mb-6 lg:mb-8">
                   <div className="w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 bg-black rounded shadow-2xl overflow-hidden relative mx-auto lg:mx-0 flex-shrink-0">
-                    <img src="/main-pfp.jpg" alt="Jonathan Ye" className="object-cover w-full h-full" loading="lazy" />
+                    <Image
+                      src="/main-pfp.jpg"
+                      alt="Jonathan Ye"
+                      width={320}
+                      height={320}
+                      quality={95}
+                      priority
+                      className="object-cover w-full h-full"
+                      sizes="(max-width: 640px) 224px, (max-width: 768px) 256px, (max-width: 1024px) 288px, 320px"
+                    />
                   </div>
                   <div className="flex-1 text-center lg:text-left lg:ml-8 min-w-0">
                     <div className="text-xs sm:text-sm lg:text-base text-gray-300 mb-1 sm:mb-2 lg:mb-3">Portfolio</div>
@@ -503,11 +513,14 @@ export default function Home(): ReactElement {
 
                   <div className="bg-gray-800/30 rounded-lg p-4 sm:p-6 border border-gray-700/50">
                     <div className="relative mb-4 sm:mb-6">
-                      <img
+                      <Image
                         src={input.aboutPfp || "/placeholder.svg"}
                         alt="Jonathan Ye"
-                        className="rounded-lg object-cover w-full"
-                        loading="lazy"
+                        width={400}
+                        height={300}
+                        quality={95}
+                        className="rounded-lg object-cover w-full h-auto"
+                        sizes="(max-width: 768px) 100vw, 400px"
                       />
                     </div>
                     <h4 className="text-lg sm:text-xl font-bold mb-2">Jonathan Ye</h4>
@@ -516,14 +529,20 @@ export default function Home(): ReactElement {
                       {input.aboutMe}
                     </p>
 
-                    {/* Gallery Images */}
+                    {/* Gallery Images - Mobile */}
                     {galleryImages.map((image, index) => (
                       <div key={index} className="relative mb-4 sm:mb-6 last:mb-0">
-                        <img
+                        <Image
                           src={image.src || "/placeholder.svg"}
                           alt="Gallery Image"
-                          className="rounded-lg object-cover w-full"
-                          loading="lazy"
+                          width={800}
+                          height={600}
+                          quality={95}
+                          priority={index < 2}
+                          className="rounded-lg object-cover w-full h-auto"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          placeholder="blur"
+                          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
                         />
                         {image.caption && (
                           <div className="mt-2">
@@ -561,25 +580,34 @@ export default function Home(): ReactElement {
                 <div className="mb-8">
                   <h3 className="text-2xl font-semibold mb-6">About me</h3>
                   <div className="relative mb-6">
-                    <img
+                    <Image
                       src={input.aboutPfp || "/placeholder.svg"}
                       alt="Jonathan Ye"
-                      className="rounded-lg object-cover w-full"
-                      loading="lazy"
+                      width={400}
+                      height={300}
+                      quality={95}
+                      className="rounded-lg object-cover w-full h-auto"
+                      sizes="(max-width: 768px) 100vw, 400px"
                     />
                   </div>
                   <h4 className="text-2xl font-bold mb-3">Jonathan Ye</h4>
                   <p className="text-base text-gray-400 mb-6">Software & Full-Stack Developer</p>
                   <p className="text-base text-gray-300 mb-6 whitespace-pre-line leading-relaxed">{input.aboutMe}</p>
 
-                  {/* Gallery Images */}
+                  {/* Gallery Images - Desktop */}
                   {galleryImages.map((image, index) => (
                     <div key={index} className="relative mb-6">
-                      <img
+                      <Image
                         src={image.src || "/placeholder.svg"}
                         alt="Gallery Image"
-                        className="rounded-lg object-cover w-full"
-                        loading="lazy"
+                        width={800}
+                        height={600}
+                        quality={95}
+                        priority={index < 2}
+                        className="rounded-lg object-cover w-full h-auto"
+                        sizes="(max-width: 1200px) 100vw, 400px"
+                        placeholder="blur"
+                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
                       />
                       {image.caption && (
                         <div className="mt-3">
