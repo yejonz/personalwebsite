@@ -1,7 +1,9 @@
 "use client"
 
+import type React from "react"
+
 import { useState, useRef, useEffect } from "react"
-import { Play, Pause, SkipBack, SkipForward, Shuffle, Volume2, VolumeX, FileMusicIcon as Music2 } from "lucide-react"
+import { Play, Pause, SkipBack, SkipForward, Shuffle, Volume2, VolumeX, Music2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Slider } from "@/components/ui/slider"
 
@@ -19,9 +21,16 @@ type MusicTrack = {
 interface MusicPlayerFooterProps {
   isPlaying: boolean
   onPlayStateChange: (playing: boolean) => void
+  isShuffled?: boolean
+  onShuffleStateChange?: (shuffled: boolean) => void
 }
 
-export function MusicPlayerFooter({ isPlaying: parentIsPlaying, onPlayStateChange }: MusicPlayerFooterProps) {
+export function MusicPlayerFooter({
+  isPlaying: parentIsPlaying,
+  onPlayStateChange,
+  isShuffled: parentIsShuffled = true,
+  onShuffleStateChange,
+}: MusicPlayerFooterProps) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
@@ -42,6 +51,13 @@ export function MusicPlayerFooter({ isPlaying: parentIsPlaying, onPlayStateChang
   useEffect(() => {
     setIsPlaying(parentIsPlaying)
   }, [parentIsPlaying])
+
+  // Sync with parent shuffle state
+  useEffect(() => {
+    if (parentIsShuffled !== undefined) {
+      setIsShuffled(parentIsShuffled)
+    }
+  }, [parentIsShuffled])
 
   // Custom setter that also notifies parent - prevent infinite loops
   const setIsPlayingAndNotifyParent = (playing: boolean) => {
@@ -72,16 +88,16 @@ export function MusicPlayerFooter({ isPlaying: parentIsPlaying, onPlayStateChang
       setUserHasInteracted(true)
       setShowAutoplayPrompt(false)
       // Remove the listeners after first interaction
-      document.removeEventListener('click', handleUserInteraction)
-      document.removeEventListener('keydown', handleUserInteraction)
+      document.removeEventListener("click", handleUserInteraction)
+      document.removeEventListener("keydown", handleUserInteraction)
     }
 
-    document.addEventListener('click', handleUserInteraction)
-    document.addEventListener('keydown', handleUserInteraction)
+    document.addEventListener("click", handleUserInteraction)
+    document.addEventListener("keydown", handleUserInteraction)
 
     return () => {
-      document.removeEventListener('click', handleUserInteraction)
-      document.removeEventListener('keydown', handleUserInteraction)
+      document.removeEventListener("click", handleUserInteraction)
+      document.removeEventListener("keydown", handleUserInteraction)
     }
   }, [])
 
@@ -93,7 +109,7 @@ export function MusicPlayerFooter({ isPlaying: parentIsPlaying, onPlayStateChang
         const response = await fetch("/api/blob-music")
         if (!response.ok) throw new Error("Failed to fetch tracks")
         const tracks = await response.json()
-        
+
         if (tracks && tracks.length > 0) {
           console.log("Loaded tracks:", tracks)
           setPlaylist(tracks)
@@ -215,7 +231,7 @@ export function MusicPlayerFooter({ isPlaying: parentIsPlaying, onPlayStateChang
     }
 
     const newPlayingState = !isPlaying
-    
+
     if (newPlayingState) {
       if (audioReady) {
         audioRef.current?.play().catch((error) => {
@@ -303,7 +319,12 @@ export function MusicPlayerFooter({ isPlaying: parentIsPlaying, onPlayStateChang
   const toggleShuffle = () => {
     const newShuffleState = !isShuffled
     setIsShuffled(newShuffleState)
-    
+
+    // Notify parent component
+    if (onShuffleStateChange) {
+      onShuffleStateChange(newShuffleState)
+    }
+
     if (newShuffleState && playlist.length > 0) {
       // When enabling shuffle, create new shuffle order and pick random starting track
       const indices = shufflePlaylist()
@@ -383,9 +404,9 @@ export function MusicPlayerFooter({ isPlaying: parentIsPlaying, onPlayStateChang
 
             {/* Player Controls */}
             <div className="flex items-center space-x-2 flex-shrink-0">
-              <Button 
-                variant="ghost" 
-                size="icon" 
+              <Button
+                variant="ghost"
+                size="icon"
                 className="w-8 h-8 text-gray-400 hover:text-white hover:bg-transparent"
                 onClick={playPreviousTrack}
                 disabled={!canPlay}
@@ -395,23 +416,18 @@ export function MusicPlayerFooter({ isPlaying: parentIsPlaying, onPlayStateChang
               <Button
                 size="icon"
                 className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                  canPlay && audioReady
-                    ? 'bg-white hover:bg-gray-200' 
-                    : 'bg-gray-600 cursor-not-allowed'
+                  canPlay && audioReady ? "bg-white hover:bg-gray-200" : "bg-gray-600 cursor-not-allowed"
                 }`}
                 onClick={handlePlayClick}
                 disabled={!canPlay}
               >
-                {isPlaying ? 
-                  <Pause className="w-4 h-4 text-black" /> : 
-                  <Play className="w-4 h-4 text-black ml-0.5" />
-                }
+                {isPlaying ? <Pause className="w-4 h-4 text-black" /> : <Play className="w-4 h-4 text-black ml-0.5" />}
               </Button>
-              <Button 
-                variant="ghost" 
-                size="icon" 
+              <Button
+                variant="ghost"
+                size="icon"
                 className="w-8 h-8 text-gray-400 hover:text-white hover:bg-transparent"
-                onClick={playNextTrack} 
+                onClick={playNextTrack}
                 disabled={!canPlay}
               >
                 <SkipForward className="w-4 h-4" />
@@ -452,9 +468,9 @@ export function MusicPlayerFooter({ isPlaying: parentIsPlaying, onPlayStateChang
           {/* Player Controls */}
           <div className="flex flex-col items-center space-y-3 flex-1 max-w-xl mx-auto">
             <div className="flex items-center space-x-5">
-              <Button 
-                variant="ghost" 
-                size="icon" 
+              <Button
+                variant="ghost"
+                size="icon"
                 className="w-9 h-9 text-gray-400 hover:text-white hover:bg-transparent"
                 onClick={playPreviousTrack}
                 disabled={!canPlay}
@@ -464,23 +480,18 @@ export function MusicPlayerFooter({ isPlaying: parentIsPlaying, onPlayStateChang
               <Button
                 size="icon"
                 className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                  canPlay && audioReady
-                    ? 'bg-white hover:bg-gray-200' 
-                    : 'bg-gray-600 cursor-not-allowed'
+                  canPlay && audioReady ? "bg-white hover:bg-gray-200" : "bg-gray-600 cursor-not-allowed"
                 }`}
                 onClick={handlePlayClick}
                 disabled={!canPlay}
               >
-                {isPlaying ? 
-                  <Pause className="w-5 h-5 text-black" /> : 
-                  <Play className="w-5 h-5 text-black ml-0.5" />
-                }
+                {isPlaying ? <Pause className="w-5 h-5 text-black" /> : <Play className="w-5 h-5 text-black ml-0.5" />}
               </Button>
-              <Button 
-                variant="ghost" 
-                size="icon" 
+              <Button
+                variant="ghost"
+                size="icon"
                 className="w-9 h-9 text-gray-400 hover:text-white hover:bg-transparent"
-                onClick={playNextTrack} 
+                onClick={playNextTrack}
                 disabled={!canPlay}
               >
                 <SkipForward className="w-5 h-5" />
@@ -505,18 +516,18 @@ export function MusicPlayerFooter({ isPlaying: parentIsPlaying, onPlayStateChang
           {/* Volume, Shuffle and Other Controls */}
           <div className="flex items-center space-x-3 w-96 justify-end">
             <div className="flex items-center space-x-3">
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                className={`w-9 h-9 ${isShuffled ? 'text-green-500' : 'text-gray-400'} hover:text-white hover:bg-transparent`}
+              <Button
+                variant="ghost"
+                size="icon"
+                className={`w-9 h-9 ${isShuffled ? "text-green-500" : "text-gray-400"} hover:text-white hover:bg-transparent`}
                 onClick={toggleShuffle}
                 disabled={!canPlay}
               >
                 <Shuffle className="w-5 h-5" />
               </Button>
-              <Button 
-                variant="ghost" 
-                size="icon" 
+              <Button
+                variant="ghost"
+                size="icon"
                 className="w-9 h-9 text-gray-400 hover:text-white hover:bg-transparent p-0"
                 onClick={toggleMute}
                 disabled={!canPlay}

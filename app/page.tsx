@@ -7,7 +7,7 @@ import type { ReactElement } from "react"
 
 import { useState, useCallback } from "react"
 import { Button } from "@/components/ui/button"
-import { Play, Pause, ChevronRight, ChevronLeft, Mail, Linkedin, Github } from "lucide-react"
+import { Play, Pause, ChevronRight, ChevronLeft, Mail, Linkedin, Github, Shuffle } from "lucide-react"
 import { MusicPlayerFooter } from "@/my_components/music_player_footer"
 import input from "../public/input.json"
 
@@ -96,6 +96,7 @@ export default function Home(): ReactElement {
   const [selectedTrack, setSelectedTrack] = useState<number | null>(null)
   const [showArtistPanel, setShowArtistPanel] = useState(true)
   const [slideshowImages, setSlideshowImages] = useState<{ [key: string]: string }>({})
+  const [isShuffled, setIsShuffled] = useState(true)
 
   useEffect(() => {
     const fetchSlideshowImages = async () => {
@@ -155,6 +156,10 @@ export default function Home(): ReactElement {
   // Use useCallback to prevent infinite loops
   const handlePlayStateChange = useCallback((playing: boolean) => {
     setIsPlaying(playing)
+  }, [])
+
+  const handleShuffleStateChange = useCallback((shuffled: boolean) => {
+    setIsShuffled(shuffled)
   }, [])
 
   // Handle scroll events to show scrollbars only when scrolling
@@ -268,17 +273,60 @@ export default function Home(): ReactElement {
 
                 {/* Action Buttons */}
                 <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-3 sm:space-y-0 sm:space-x-4 lg:space-x-6 mb-6 lg:mb-8">
-                  <Button
-                    size="icon"
-                    className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-green-500 hover:bg-green-400 rounded-full flex items-center justify-center flex-shrink-0"
-                    onClick={() => setIsPlaying(!isPlaying)}
-                  >
-                    {isPlaying ? (
-                      <Pause className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-black" />
-                    ) : (
-                      <Play className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-black ml-1" />
-                    )}
-                  </Button>
+                  <div className="flex items-center space-x-3">
+                    <Button
+                      size="icon"
+                      className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-green-500 hover:bg-green-400 rounded-full flex items-center justify-center flex-shrink-0"
+                      onClick={() => setIsPlaying(!isPlaying)}
+                    >
+                      {/* base */}
+                      {isPlaying ? (
+                        <Pause
+                          style={{ width: "22px", height: "22px" }}
+                          className="sm:hidden lg:hidden text-black"
+                        />
+                      ) : (
+                        <Play
+                          style={{ width: "22px", height: "22px" }}
+                          className="sm:hidden lg:hidden text-black ml-1"
+                        />
+                      )}
+                      {/* sm */}
+                      {isPlaying ? (
+                        <Pause
+                          style={{ width: "25px", height: "25px" }}
+                          className="hidden sm:inline-block lg:hidden text-black"
+                        />
+                      ) : (
+                        <Play
+                          style={{ width: "25px", height: "25px" }}
+                          className="hidden sm:inline-block lg:hidden text-black ml-[3px]"
+                        />
+                      )}
+                      {/* lg */}
+                      {isPlaying ? (
+                        <Pause
+                          style={{ width: "28px", height: "28px" }}
+                          className="hidden lg:inline-block text-black"
+                        />
+                      ) : (
+                        <Play
+                          style={{ width: "28px", height: "28px" }}
+                          className="hidden lg:inline-block text-black ml-[4px]"
+                        />
+                      )}
+                    </Button>
+                    <Button
+                      size="icon"
+                      className="w-12 h-12 sm:w-13 sm:h-13 lg:w-15 lg:h-15 bg-transparent hover:bg-gray-800/30 rounded-full flex items-center justify-center transition-colors"
+                      onClick={() => setIsShuffled(!isShuffled)}
+                    >
+                      <Shuffle
+                        style={{ width: "32px", height: "32px" }}
+                        className={`transition-colors ${isShuffled ? "text-green-500" : "text-gray-400"}`}
+                      />
+                    </Button>
+                  </div>
                   <span className="hidden sm:inline text-gray-400">•</span>
                   <Button
                     variant="outline"
@@ -294,7 +342,22 @@ export default function Home(): ReactElement {
 
                 {/* Experience */}
                 <div className="mb-8 lg:mb-10">
-                  <div className="flex items-center space-x-3 text-gray-300 text-lg sm:text-xl lg:text-2xl mb-4 sm:mb-6 lg:mb-8">
+                  {/* Table Header - similar to Spotify */}
+                  <div className="flex items-center justify-between px-3 sm:px-4 lg:px-6 py-2 border-b border-gray-700/30 mb-6">
+                    <div className="flex items-center space-x-4 text-gray-400 text-base sm:text-lg">
+                      <span className="w-6 sm:w-8 lg:w-12 text-center">#</span>
+                      <span>Title</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3 sm:gap-4 lg:gap-6 px-3 sm:px-4 lg:px-6 text-gray-300 text-base sm:text-lg lg:text-xl mb-3 sm:mb-4 lg:mb-6">
+                    {/* Disc Icon - aligned with # column */}
+                    <div className="w-6 sm:w-8 lg:w-12 flex items-center justify-center flex-shrink-0">
+                      <div className="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center">
+                        <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
+                      </div>
+                    </div>
+                    {/* Experience text - aligned with Title column */}
                     <span>Experience</span>
                   </div>
 
@@ -404,7 +467,14 @@ export default function Home(): ReactElement {
 
                 {/* Projects */}
                 <div className="mb-8 lg:mb-10">
-                  <div className="flex items-center space-x-3 text-gray-300 text-lg sm:text-xl lg:text-2xl mb-4 sm:mb-6 lg:mb-8">
+                  <div className="flex items-center gap-3 sm:gap-4 lg:gap-6 px-3 sm:px-4 lg:px-6 text-gray-300 text-base sm:text-lg lg:text-xl mb-3 sm:mb-4 lg:mb-6">
+                    {/* Disc Icon - aligned with # column */}
+                    <div className="w-6 sm:w-8 lg:w-12 flex items-center justify-center flex-shrink-0">
+                      <div className="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center">
+                        <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
+                      </div>
+                    </div>
+                    {/* Projects text - aligned with Title column */}
                     <span>Projects</span>
                   </div>
 
@@ -650,7 +720,12 @@ export default function Home(): ReactElement {
 
         {/* Bottom Player - Hidden on Mobile */}
         <div className="hidden lg:block">
-          <MusicPlayerFooter isPlaying={isPlaying} onPlayStateChange={handlePlayStateChange} />
+          <MusicPlayerFooter
+            isPlaying={isPlaying}
+            onPlayStateChange={handlePlayStateChange}
+            isShuffled={isShuffled}
+            onShuffleStateChange={handleShuffleStateChange}
+          />
         </div>
       </div>
     </>

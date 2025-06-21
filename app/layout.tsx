@@ -6,6 +6,9 @@ import { ThemeProvider } from "@/my_components/theme_provider"
 export const metadata: Metadata = {
   title: "Jonathan Ye",
   description: "Jonathan Ye's Personal Website",
+  icons: {
+    icon: '/spotify.png',
+  },
 }
 
 export default function RootLayout({
