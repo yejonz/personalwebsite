@@ -264,7 +264,7 @@ export default function Home(): ReactElement {
                       <span className="hidden lg:inline">•</span>
                       <span>Computer Science</span>
                       <span className="hidden lg:inline">•</span>
-                      <span>GPA: 3.95</span>
+                      <span>GPA: 3.96</span>
                       <span className="hidden lg:inline">•</span>
                       <span>2023-2027</span>
                     </div>

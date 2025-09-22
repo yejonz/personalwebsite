@@ -9,13 +9,22 @@
     },
   "experiences": [
     {
+      "role": "Software Engineering Intern",
+      "company": "Citadel",
+      "type": "Internship",
+      "date": "June '26 - Aug. '26",
+      "stack": "Python",
+      "image": "/citadel.png",
+      "details": "Incoming Summer 2026 in the Equity Quantitative Research (EQR) team"
+    },
+    {
       "role": "Software Development Engineering Intern",
       "company": "Amazon",
       "type": "Internship",
       "date": "June '25 - Sep. '25",
       "stack": "Java, AWS, MCP",
       "image": "/amazon.jpg",
-      "details": "Interning @ PXT (People eXperiences Technology)"
+      "details": "Built an AI agent service for the Global Leave Integration Platforms team to analyze complex HR case workflows and pinpoint relevant logs among millions generated per hour across multiple CloudWatch accounts; joined by internal teams in People eXperience Technology."
     },
     {
       "role": "Researcher",
