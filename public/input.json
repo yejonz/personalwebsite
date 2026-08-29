@@ -13,7 +13,7 @@
       "company": "Citadel",
       "type": "Internship",
       "date": "June '26 - Aug. '26",
-      "stack": "Python",
+      "stack": "Python, MCP, GCS, BigQuery",
       "image": "/citadel.png",
       "details": "Built a memory system to help Quantitative Researchers effectively retrieve credible information from past work, using a RAG pipeline that pre-processes multi-modal data, provides efficient access to unstructured documents and financial metrics through MCP, and cleans/compacts curated memory context on a daily basis."
     },
