@@ -9,13 +9,13 @@
     },
   "experiences": [
     {
-      "role": "Software Engineering Intern",
+      "role": "Quantitative Developer Intern",
       "company": "Citadel",
       "type": "Internship",
       "date": "June '26 - Aug. '26",
       "stack": "Python",
       "image": "/citadel.png",
-      "details": "Incoming Summer 2026 in the Equity Quantitative Research (EQR) team"
+      "details": "Built a memory system to help Quantitative Researchers effectively retrieve credible information from past work, using a RAG pipeline that pre-processes multi-modal data, provides efficient access to unstructured documents and financial metrics through MCP, and cleans/compacts curated memory context on a daily basis."
     },
     {
       "role": "Software Development Engineering Intern",
@@ -24,7 +24,7 @@
       "date": "June '25 - Sep. '25",
       "stack": "Java, AWS, MCP",
       "image": "/amazon.jpg",
-      "details": "Built an AI agent service for the Global Leave Integration Platforms team to analyze complex HR case workflows and pinpoint relevant logs among millions generated per hour across multiple CloudWatch accounts; joined by internal teams in People eXperience Technology."
+      "details": "Built an AI agent for the Global Leave Integration Platforms team to analyze complex HR case workflows and pinpoint relevant logs among millions generated per hour across multiple CloudWatch accounts; joined by internal teams in People eXperience Technology."
     },
     {
       "role": "Researcher",
